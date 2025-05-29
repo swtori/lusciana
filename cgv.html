@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lusciana - CGV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(45deg, #225071, #77E0F5);
+            --text-color: #FFFFFF;
+            --background: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --hover-color: #77E0F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: var(--background);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--primary-gradient);
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .nav-tab:hover {
+            background: rgba(119, 224, 245, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: var(--primary-gradient);
+            color: var(--text-color);
+            box-shadow: 0 4px 15px rgba(119, 224, 245, 0.2);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .lang-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(119, 224, 245, 0.1);
+        }
+
+        .lang-btn.active {
+            background: var(--primary-gradient);
+            color: var(--text-color);
+            box-shadow: 0 4px 15px rgba(119, 224, 245, 0.2);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-section {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        strong {
+            color: #77E0F5;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        em {
+            color: #77E0F5;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-gradient);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .back-button {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-tabs">
+                <a href="cgu.html" class="nav-tab">CGU</a>
+                <a href="cgv.html" class="nav-tab active">CGV</a>
+            </div>
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('fr')">FR</button>
+                <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+            </div>
+            <h1 id="main-title">Lusciana - CGV</h1>
+        </div>
+
+        <div class="content-container">
+            <div class="content-section fr">
+                <h2>Conditions Générales de Vente</h2>
+                <p><strong>1. Objet du contrat</strong><br>
+                    Les présentes Conditions Générales de Vente (CGV) régissent les prestations de construction virtuelles proposées par notre team sur le jeu Minecraft. Ces prestations incluent, sans s'y limiter : spawns, hubs, maps sur mesure.</p>
+                
+                <p><strong>2. Commande et devis</strong><br>
+                    Toute demande de projet donne lieu à un devis gratuit. La commande est validée après acceptation écrite du devis et versement éventuel d'un acompte. Les délais sont communiqués à titre indicatif.</p>
+                
+                <p><strong>3. Tarifs et paiement</strong><br>
+                    Les tarifs sont exprimés en euros (€). Le paiement s'effectue via PayPal, virement bancaire ou tout autre moyen accepté. Un acompte de 30 à 50 % peut être exigé à la commande. Le solde est dû avant la livraison finale.</p>
+                
+                <p><strong>4. Délais de livraison</strong><br>
+                    Les délais varient selon la taille et la complexité du projet. Des retards peuvent survenir en cas de force majeure ou de modifications tardives demandées par le client.</p>
+                
+                <p><strong>5. Droits d'auteur</strong><br>
+                    Sauf accord contraire, la propriété intellectuelle du build reste partagée : le client détient un droit d'usage, la team conserve le droit de diffusion à titre de vitrine. Il est également possible, si cela est précisé dans l'accord, que la team puisse revendre le build à d'autres clients. Pour toute exclusivité ou cession complète des droits, un accord spécifique est requis.</p>
+                
+                <p><strong>6. Modifications</strong><br>
+                    Une éventuelle phase de correction est incluse après livraison, uniquement si certains points du cahier des charges initial n'ont pas été respectés. Toute modification majeure ou ajout non prévu dans le cahier des charges sera facturé.</p>
+                
+                <p><strong>7. Annulation / Remboursement</strong><br>
+                    En cas d'annulation après début du projet, l'acompte reste dû. Aucun remboursement n'est effectué une fois le projet livré.</p>
+                
+                <p><strong>8. Responsabilité</strong><br>
+                    La team n'est pas responsable des incompatibilités liées aux versions de Minecraft, plugins ou serveurs tiers. Aucun support technique n'est garanti en dehors du cadre de la prestation convenue.</p>
+                
+                <p><strong>9. Confidentialité</strong><br>
+                    Tout projet sous NDA ou à diffusion restreinte fera l'objet d'un engagement écrit. Aucune publication ne sera faite sans accord préalable.</p>
+                
+                <p><strong>10. Litiges</strong><br>
+                    En cas de litige, le droit français s'applique. Une résolution amiable sera priorisée avant toute action judiciaire.</p>
+                
+                <p>📌 <em>Ces CGV s'appliquent à tout client, particulier ou serveur Minecraft.</em></p>
+            </div>
+
+            <div class="content-section en" style="display:none">
+                <h2>General Sales Conditions</h2>
+                <p><strong>1. Contract purpose</strong><br>
+                    These General Terms and Conditions (GTC) govern the virtual construction services provided by our team on the Minecraft game. These services include, but are not limited to: spawns, hubs, custom maps.</p>
+                
+                <p><strong>2. Order and quote</strong><br>
+                    Any project request will result in a free quote. The order is confirmed after written acceptance of the quote and, if applicable, the payment of a deposit. Deadlines are provided for informational purposes.</p>
+                
+                <p><strong>3. Pricing and payment</strong><br>
+                    Prices are expressed in euros (€). Payment is made via PayPal, bank transfer, or any other accepted method. A deposit of 30 to 50% may be required at the time of order. The balance is due before the final delivery.</p>
+                
+                <p><strong>4. Delivery deadlines</strong><br>
+                    Deadlines vary depending on the size and complexity of the project. Delays may occur due to force majeure or late modifications requested by the client.</p>
+                
+                <p><strong>5. Copyright</strong><br>
+                    Unless otherwise agreed, the intellectual property of the build remains shared: the client has a usage right, and the team retains the right of dissemination for showcase purposes. It is also possible, if specified in the agreement, for the team to resell the build to other clients. For exclusivity or full rights transfer, a specific agreement is required.</p>
+                
+                <p><strong>6. Modifications</strong><br>
+                    An optional correction phase is included after delivery, but only if certain points of the initial specifications have not been respected. Any major modification or addition not provided in the specifications will be billed.</p>
+                
+                <p><strong>7. Cancellation / Refund</strong><br>
+                    In case of cancellation after the start of the project, the deposit remains due. No refund will be made once the project is delivered.</p>
+                
+                <p><strong>8. Liability</strong><br>
+                    The team is not responsible for incompatibilities related to Minecraft versions, plugins, or third-party servers. No technical support is guaranteed outside the scope of the agreed service.</p>
+                
+                <p><strong>9. Confidentiality</strong><br>
+                    Any project under an NDA or with restricted distribution will be subject to a written commitment. No publication will be made without prior agreement.</p>
+                
+                <p><strong>10. Disputes</strong><br>
+                    In case of dispute, French law applies. An amicable resolution will be prioritized before any legal action.</p>
+                
+                <p>📌 <em>These GTC apply to all clients, individuals, or Minecraft servers.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-button">Retour à l'accueil</a>
+
+    <script>
+        function switchLanguage(lang) {
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.getAttribute('onclick').includes(lang)) btn.classList.add('active');
+            });
+
+            // Update content visibility
+            document.querySelectorAll('.content-section').forEach(el => {
+                el.style.display = el.classList.contains(lang) ? 'block' : 'none';
+            });
+
+            // Update main title
+            document.getElementById('main-title').textContent = lang === 'fr' 
+                ? 'Lusciana - CGV' 
+                : 'Lusciana - Terms of Service';
+
+            // Update back button
+            document.querySelector('.back-button').textContent = lang === 'fr' 
+                ? 'Retour à l\'accueil' 
+                : 'Back to Home';
+        }
+    </script>
+</body>
+</html> 
