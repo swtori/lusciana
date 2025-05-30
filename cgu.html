@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lusciana - CGU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(45deg, #225071, #77E0F5);
+            --text-color: #FFFFFF;
+            --background: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --hover-color: #77E0F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: var(--background);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 2rem;
+            padding-top: 120px;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 65px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            z-index: 1001;
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: #FFFFFF;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .server-ip {
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .server-ip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .server-ip::after {
+            content: "Cliquez pour copier";
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .server-ip:hover::after {
+            opacity: 1;
+        }
+
+        .server-ip.copied::after {
+            content: "Copié !";
+            background: #4CAF50;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .home-icon {
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+        }
+
+        .home-icon:hover {
+            transform: scale(1.1);
+            color: #77E0F5;
+            opacity: 1;
+        }
+
+        .home-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem;
+            border-radius: 20px;
+        }
+
+        .lang-option {
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .lang-option:hover {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-option.active {
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.6rem 1.2rem;
+                height: 55px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .navbar-content {
+                position: fixed;
+                top: 55px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-content.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .server-ip {
+                width: 100%;
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+
+            .nav-right {
+                width: 100%;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                height: 50px;
+            }
+
+            .navbar-content {
+                top: 50px;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .server-ip {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.7rem;
+            }
+
+            .nav-right {
+                gap: 1.2rem;
+            }
+
+            .home-icon {
+                font-size: 1.1rem;
+            }
+
+            .lang-selector {
+                gap: 0.2rem;
+                padding: 0.1rem;
+            }
+
+            .lang-option {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.3rem;
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--primary-gradient);
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+        }
+
+        .nav-tab:hover {
+            background: rgba(119, 224, 245, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: var(--primary-gradient);
+            color: var(--text-color);
+            box-shadow: 0 4px 15px rgba(119, 224, 245, 0.2);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .lang-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(119, 224, 245, 0.1);
+        }
+
+        .lang-btn.active {
+            background: var(--primary-gradient);
+            color: var(--text-color);
+            box-shadow: 0 4px 15px rgba(119, 224, 245, 0.2);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-section {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        strong {
+            color: #77E0F5;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        em {
+            color: #77E0F5;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-gradient);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                padding-top: 100px;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .back-button {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="index.html" class="navbar-brand">Lusciana</a>
+        <div class="navbar-content">
+            <div class="server-ip">IP: game1.hebergtonserv.com:25567</div>
+            <div class="nav-right">
+                <a href="index.html" class="home-icon" aria-label="Accueil">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/>
+                    </svg>
+                </a>
+                <div class="lang-selector">
+                    <span class="lang-option active">FR</span>
+                    <span class="lang-option">EN</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div class="nav-tabs">
+                <a href="cgu.html" class="nav-tab active">CGU</a>
+                <a href="cgv.html" class="nav-tab">CGV</a>
+            </div>
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('fr')">FR</button>
+                <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+            </div>
+            <h1 id="main-title">Lusciana - CGU</h1>
+        </div>
+
+        <div class="content-container">
+            <div class="content-section fr">
+                <h2>Conditions Générales d'Utilisation</h2>
+                <p><strong>1. Objet des CGU</strong><br>
+                    Les présentes CGU encadrent l'utilisation du site vitrine / portfolio de la team de build Minecraft. En naviguant sur le site, l'utilisateur accepte sans réserve les présentes conditions.</p>
+                
+                <p><strong>2. Accès au site</strong><br>
+                    Le site est accessible 24h/24, 7j/7, sauf interruption pour maintenance. L'équipe décline toute responsabilité en cas de bug, d'indisponibilité temporaire ou de mauvaise configuration utilisateur.</p>
+                
+                <p><strong>3. Propriété intellectuelle</strong><br>
+                    Tous les contenus présents (builds, images, logos, textes) sont la propriété exclusive de la team ou de ses partenaires. Toute reproduction ou utilisation sans autorisation est interdite.</p>
+                
+                <p><strong>4. Utilisation des contenus</strong><br>
+                    L'utilisateur s'engage à ne pas copier, distribuer, modifier ou exploiter les contenus du site sans accord écrit préalable.</p>
+                
+                <p><strong>5. Formulaires de contact / commande</strong><br>
+                    Les informations envoyées via les formulaires doivent être exactes et respectueuses. Tout message abusif, inapproprié ou non pertinent pourra être supprimé sans avertissement.</p>
+                
+                <p><strong>6. Comportement des utilisateurs</strong><br>
+                    Tout comportement irrespectueux, insultant, ou toute tentative de spam est strictement interdit et pourra entraîner un blocage d'accès.</p>
+                
+                <p><strong>7. Protection des données personnelles</strong><br>
+                    Les données collectées via les formulaires sont utilisées uniquement pour le traitement des demandes. Elles ne sont ni revendues ni cédées. Vous pouvez demander leur suppression à tout moment.</p>
+                
+                <p><strong>8. Cookies</strong><br>
+                    Le site peut utiliser des cookies à des fins de navigation et de statistiques. Vous pouvez refuser ou désactiver les cookies dans les paramètres de votre navigateur.</p>
+                
+                <p><strong>9. Liens externes</strong><br>
+                    Le site peut contenir des liens vers d'autres sites. Nous ne sommes pas responsables de leur contenu ou de leur sécurité.</p>
+                
+                <p><strong>10. Modification des CGU</strong><br>
+                    Les présentes CGU peuvent être modifiées à tout moment, sans préavis. L'utilisateur est invité à les consulter régulièrement.</p>
+                
+                <p><strong>11. Droit applicable</strong><br>
+                    Les CGU sont soumises au droit français. En cas de litige, une tentative de résolution amiable sera privilégiée avant toute action judiciaire.</p>
+                
+                <p>📌 <em>Ces CGU s'appliquent à tous les utilisateurs du site, clients ou simples visiteurs.</em></p>
+            </div>
+
+            <div class="content-section en" style="display:none">
+                <h2>General Terms of Use</h2>
+                <p><strong>1. Purpose of the Terms</strong><br>
+                    These Terms govern the use of the Minecraft Build Team's portfolio website. By using the site, users fully accept these conditions.</p>
+                
+                <p><strong>2. Access to the Site</strong><br>
+                    The website is accessible 24/7, except in case of maintenance or technical issues. The team is not responsible for service interruptions or user-side misconfigurations.</p>
+                
+                <p><strong>3. Intellectual Property</strong><br>
+                    All content (builds, images, logos, texts) is the exclusive property of the team or its partners. Unauthorized reproduction or use is strictly prohibited.</p>
+                
+                <p><strong>4. Use of Content</strong><br>
+                    Users agree not to copy, distribute, modify, or exploit any content on the site without written permission.</p>
+                
+                <p><strong>5. Contact / Order Forms</strong><br>
+                    Information submitted via forms must be accurate and respectful. Abusive or irrelevant messages may be deleted without notice.</p>
+                
+                <p><strong>6. User Behavior</strong><br>
+                    Users must behave respectfully. Spam, insults, or inappropriate conduct will result in access restrictions.</p>
+                
+                <p><strong>7. Personal Data Protection</strong><br>
+                    Data collected via forms is used only for request processing. It is not sold or shared. Users may request deletion at any time.</p>
+                
+                <p><strong>8. Cookies</strong><br>
+                    The site may use cookies for navigation or analytics. Users can disable cookies in their browser settings.</p>
+                
+                <p><strong>9. External Links</strong><br>
+                    The website may contain links to third-party sites. The team is not responsible for their content or security.</p>
+                
+                <p><strong>10. Changes to the Terms</strong><br>
+                    These Terms may be updated at any time without notice. Users are encouraged to review them regularly.</p>
+                
+                <p><strong>11. Governing Law</strong><br>
+                    These Terms are governed by French law. In case of dispute, an amicable resolution will be sought before legal action.</p>
+                
+                <p>📌 <em>These terms apply to all website users, clients or casual visitors.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-button">Retour à l'accueil</a>
+
+    <script src="translations.js"></script>
+    <script>
+        // Script pour la copie de l'IP
+        const serverIp = document.querySelector('.server-ip');
+        const ipText = 'game1.hebergtonserv.com:25567';
+
+        serverIp.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(ipText);
+                serverIp.classList.add('copied');
+                setTimeout(() => {
+                    serverIp.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Erreur lors de la copie:', err);
+            }
+        });
+
+        // Script pour le menu hamburger
+        const hamburger = document.querySelector('.hamburger');
+        const navbarContent = document.querySelector('.navbar-content');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navbarContent.classList.toggle('active');
+            document.body.style.overflow = navbarContent.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Fermer le menu quand on clique sur un lien
+        document.querySelectorAll('.navbar-content a, .navbar-content .server-ip').forEach(element => {
+            element.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navbarContent.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Fermer le menu quand on clique en dehors
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navbarContent.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navbarContent.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Fermer le menu lors du redimensionnement de la fenêtre
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                hamburger.classList.remove('active');
+                navbarContent.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Script pour le changement de langue
+        const langOptions = document.querySelectorAll('.lang-option');
+        const langButtons = document.querySelectorAll('.lang-btn');
+        let currentLang = localStorage.getItem('language') || 'fr';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            
+            // Mettre à jour les classes actives pour les deux types de boutons
+            langOptions.forEach(option => {
+                option.classList.toggle('active', option.textContent.toLowerCase() === lang);
+            });
+            
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+
+            // Mettre à jour la visibilité des sections de contenu
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = section.classList.contains(lang) ? 'block' : 'none';
+            });
+
+            // Mettre à jour le titre principal
+            document.getElementById('main-title').textContent = lang === 'fr' 
+                ? 'Lusciana - CGU' 
+                : 'Lusciana - Terms of Use';
+
+            // Mettre à jour le bouton retour
+            document.querySelector('.back-button').textContent = lang === 'fr' 
+                ? 'Retour à l\'accueil' 
+                : 'Back to Home';
+
+            // Mettre à jour les éléments avec data-translate
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Ajouter les événements de clic sur les options de langue dans la navbar
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.textContent.toLowerCase();
+                switchLanguage(lang);
+            });
+        });
+
+        // Ajouter les événements de clic sur les boutons de langue
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.textContent.toLowerCase();
+                switchLanguage(lang);
+            });
+        });
+
+        // Initialiser la langue au chargement de la page
+        switchLanguage(currentLang);
+    </script>
+</body>
+</html> 

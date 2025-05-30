@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lusciana - Accueil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-image: url('img/snkPalaisRender.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #FFFFFF;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 65px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            z-index: 1001;
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: #FFFFFF;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .server-ip {
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .server-ip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .server-ip::after {
+            content: "Cliquez pour copier";
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .server-ip:hover::after {
+            opacity: 1;
+        }
+
+        .server-ip.copied::after {
+            content: "Copié !";
+            background: #4CAF50;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .home-icon {
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+        }
+
+        .home-icon:hover {
+            transform: scale(1.1);
+            color: #77E0F5;
+            opacity: 1;
+        }
+
+        .home-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem;
+            border-radius: 20px;
+        }
+
+        .lang-option {
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .lang-option:hover {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-option.active {
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            opacity: 1;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            padding: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .cards-container.scrolled {
+            opacity: 0;
+            transform: translate(-50%, -100%);
+            pointer-events: none;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            flex: 1;
+            max-width: 320px;
+            min-width: 280px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.05);
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h2 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-section {
+            position: relative;
+            min-height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            margin-top: 100vh;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .curtain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            transform-origin: top;
+            transform: scaleY(0);
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1;
+        }
+
+        .curtain.open {
+            transform: scaleY(1);
+        }
+
+        .portfolio-content {
+            position: relative;
+            z-index: 2;
+            padding: 6rem 40px 4rem;
+            width: 100%;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+            box-sizing: border-box;
+        }
+
+        .portfolio-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-title {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 0 20px;
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 0;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            margin: 0;
+        }
+
+        .gallery-item.featured {
+            grid-column: 1 / -1;
+            aspect-ratio: 21/9;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: white;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            transform: translateY(0);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .caption {
+            opacity: 1;
+        }
+
+        .gallery-item .caption h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.85));
+            padding: 3rem 0;
+            margin-top: 0;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(119, 224, 245, 0.5), transparent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-decoration: none;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #77E0F5;
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.6rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.8rem;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-link:hover {
+            color: #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        .social-link:hover::before {
+            opacity: 0.2;
+            transform: scale(1.2);
+        }
+
+        .footer-divider {
+            width: 100%;
+            max-width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(119, 224, 245, 0.3), transparent);
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 1200px) {
+            .cards-container {
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .card {
+                max-width: 280px;
+                min-width: 240px;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .cards-container {
+                flex-wrap: wrap;
+            }
+
+            .card {
+                max-width: 260px;
+                min-width: 220px;
+                padding: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.6rem 1.2rem;
+                height: 55px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .navbar-content {
+                position: fixed;
+                top: 55px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-content.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .server-ip {
+                width: 100%;
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+
+            .nav-right {
+                width: 100%;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+
+            .card h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                height: 50px;
+            }
+
+            .navbar-content {
+                top: 50px;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .server-ip {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.7rem;
+            }
+
+            .nav-right {
+                gap: 1.2rem;
+            }
+
+            .home-icon {
+                font-size: 1.1rem;
+            }
+
+            .lang-selector {
+                gap: 0.2rem;
+                padding: 0.1rem;
+            }
+
+            .lang-option {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.3rem;
+            }
+
+            .card h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .cards-container {
+                top: 60%;
+            }
+        }
+
+        @media (max-height: 500px) {
+            .cards-container {
+                top: 70%;
+            }
+        }
+
+        @media (max-height: 400px) {
+            .cards-container {
+                top: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="index.html" class="navbar-brand">Lusciana</a>
+        <div class="navbar-content">
+            <div class="server-ip">IP: game1.hebergtonserv.com:25567</div>
+            <div class="nav-right">
+                <a href="index.html" class="home-icon" aria-label="Accueil">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/>
+                    </svg>
+                </a>
+                <div class="lang-selector">
+                    <span class="lang-option active">FR</span>
+                    <span class="lang-option">EN</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cards-container">
+        <a href="recrutement.html" class="card">
+            <h2 data-translate="recrutement">Recrutement</h2>
+        </a>
+        <a href="devis.html" class="card">
+            <h2 data-translate="devis">Devis</h2>
+        </a>
+        <a href="avis.html" class="card">
+            <h2 data-translate="avis">Avis</h2>
+        </a>
+        <a href="bugs.html" class="card">
+            <h2 data-translate="bugs">Bugs</h2>
+        </a>
+    </div>
+
+    <section class="portfolio-section">
+        <div class="curtain"></div>
+        <div class="portfolio-content">
+            <h1 class="portfolio-title" data-translate="notre-vitrine">Notre Vitrine</h1>
+            <div class="gallery">
+                <div class="gallery-item featured">
+                    <img src="img/sombrosiaSaatoriCorqline.png" alt="Sombrosia Saatori Corqline">
+                    <div class="caption">
+                        <h3 data-translate="sombrosia">Sombrosia Saatori Corqline</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img/cubeLockSaatoriCorqline.png" alt="Cube Lock Saatori Corqline">
+                    <div class="caption">
+                        <h3 data-translate="cube-lock">Cube Lock Saatori Corqline</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img/Loper9-2.jpg" alt="Loper 9">
+                    <div class="caption">
+                        <h3 data-translate="loper">Loper 9</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img/scale35SaatoriCorqline.png" alt="Scale 35 Saatori Corqline">
+                    <div class="caption">
+                        <h3 data-translate="scale">Scale 35 Saatori Corqline</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img/neloriaPastryRomeo.png" alt="Neloria Pastry Romeo">
+                    <div class="caption">
+                        <h3 data-translate="neloria">Neloria Pastry Romeo</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img/skyislandsSaatori.png" alt="Sky Islands Saatori">
+                    <div class="caption">
+                        <h3 data-translate="sky-islands">Sky Islands Saatori</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img/greekCorqline.png" alt="Greek Corqline">
+                    <div class="caption">
+                        <h3 data-translate="greek">Greek Corqline</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="index.html" class="footer-brand">Lusciana</a>
+            <div class="footer-links">
+                <a href="cgu.html" class="footer-link" data-translate="cgu">CGU</a>
+                <a href="cgv.html" class="footer-link" data-translate="cgv">CGV</a>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="social-links">
+                <a href="https://discord.gg/W2yFBQTH2f" target="_blank" class="social-link" title="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://x.com/LuscianaBT" target="_blank" class="social-link" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.tiktok.com/@lusciana_builds" target="_blank" class="social-link" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="js/imageProtection.js"></script>
+    <script>
+        // Script pour la copie de l'IP
+        const serverIp = document.querySelector('.server-ip');
+        const ipText = 'game1.hebergtonserv.com:25567';
+
+        serverIp.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(ipText);
+                serverIp.classList.add('copied');
+                setTimeout(() => {
+                    serverIp.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Erreur lors de la copie:', err);
+            }
+        });
+
+        // Script pour la galerie modale
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close-modal');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                modal.style.display = 'flex';
+                modalImg.src = img.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Script pour l'animation du rideau et du portfolio
+        const portfolioSection = document.querySelector('.portfolio-section');
+        const curtain = document.querySelector('.curtain');
+        const portfolioContent = document.querySelector('.portfolio-content');
+        const galleryItemsArray = Array.from(document.querySelectorAll('.gallery-item'));
+        const cardsContainer = document.querySelector('.cards-container');
+
+        let curtainOpened = false;
+
+        window.addEventListener('scroll', () => {
+            const rect = portfolioSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const scrollPosition = window.scrollY;
+
+            // Gestion de la disparition des cartes
+            if (scrollPosition > 100) {
+                cardsContainer.classList.add('scrolled');
+            } else {
+                cardsContainer.classList.remove('scrolled');
+            }
+
+            if (rect.top < windowHeight * 0.8 && !curtainOpened) {
+                curtain.classList.add('open');
+                curtainOpened = true;
+
+                setTimeout(() => {
+                    portfolioContent.classList.add('visible');
+                    
+                    galleryItemsArray.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, index * 200);
+                    });
+                }, 1000);
+            }
+        });
+
+        // Script pour le changement de langue
+        const langOptions = document.querySelectorAll('.lang-option');
+        let currentLang = localStorage.getItem('language') || 'fr';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            
+            // Mettre à jour les classes actives
+            langOptions.forEach(option => {
+                option.classList.toggle('active', option.textContent.toLowerCase() === lang);
+            });
+
+            // Traduire tous les éléments avec l'attribut data-translate
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Ajouter les événements de clic sur les options de langue
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.textContent.toLowerCase();
+                setLanguage(lang);
+            });
+        });
+
+        // Initialiser la langue au chargement de la page
+        setLanguage(currentLang);
+
+        // Script pour le menu hamburger
+        const hamburger = document.querySelector('.hamburger');
+        const navbarContent = document.querySelector('.navbar-content');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navbarContent.classList.toggle('active');
+            document.body.style.overflow = navbarContent.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Fermer le menu quand on clique sur un lien
+        document.querySelectorAll('.navbar-content a, .navbar-content .server-ip').forEach(element => {
+            element.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navbarContent.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Fermer le menu quand on clique en dehors
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navbarContent.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navbarContent.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Fermer le menu lors du redimensionnement de la fenêtre
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                hamburger.classList.remove('active');
+                navbarContent.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>
