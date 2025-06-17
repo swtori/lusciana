@@ -129,6 +129,14 @@
             font-size: 0.9rem;
         }
 
+        .form-group small {
+            display: block;
+            margin-top: 0.5rem;
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
         .radio-group, .checkbox-group {
             display: flex;
             gap: 1rem;
@@ -779,7 +787,6 @@
             transition: all 0.3s ease;
             cursor: pointer;
             white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .server-ip:hover {
@@ -961,6 +968,42 @@
                 padding: 0.1rem 0.3rem;
             }
         }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .input-group input {
+            width: 100px;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-bottom-color:rgb(187, 222, 251);
+            border-top-color:rgb(187, 222, 251);
+            border-left-color:rgb(187, 222, 251);
+            border-right-color:rgb(187, 222, 251);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(1, 199, 238, 0.2);
+        }
+
+        .input-group .suffix {
+            color: #000000;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -975,7 +1018,7 @@
         </button>
         <a href="index.html" class="navbar-brand">Lusciana</a>
         <div class="navbar-content">
-            <div class="server-ip">IP: game1.hebergtonserv.com:25567</div>
+            <div class="server-ip">IP: play.lusciana.fr</div>
             <div class="nav-right">
                 <a href="index.html" class="home-icon" aria-label="Accueil">
                     <svg viewBox="0 0 24 24">
@@ -1007,12 +1050,12 @@
             </div>
 
             <div class="form-group">
-                <label for="buildSize" data-translate="taille-build">Taille du build désirée :</label>
-                <div class="build-size-group">
-                    <input type="number" id="buildSize" name="buildSize" class="build-size-input" min="100" max="1000" required>
-                    <span class="build-size-unit">x</span>
+                <label for="taille" data-translate="taille-build">Taille du build désirée :</label>
+                <div class="input-group">
+                    <input type="number" id="taille" name="taille" min="1" required>
+                    <span class="suffix">x<span id="tailleValue"></span></span>
                 </div>
-                <p data-translate="taille-info">La taille du build est un facteur très important à prendre en compte.</p>
+                <small data-translate="taille-info">La taille du build est un facteur très important à prendre en compte.</small>
             </div>
 
             <div class="form-group">
@@ -1204,7 +1247,7 @@
 
             <div class="form-group">
                 <label data-translate="besoins">Besoins précis</label>
-                <textarea name="besoins" rows="4" data-translate="besoins-placeholder" placeholder="Décrivez vos besoins précis ici... (ex: style de construction, thème, couleurs préférées, etc.)" class="besoins-input"></textarea>
+                <input type="text" name="besoins" data-translate="besoins-placeholder" placeholder="Décrivez vos besoins précis ici..." class="besoins-input">
             </div>
 
             <button type="submit" class="submit-button" data-translate="demander-devis">Demander un devis</button>
@@ -1261,12 +1304,11 @@
         });
 
         // Gestion de l'affichage de la taille
-        const buildSizeInput = document.getElementById('buildSize');
-        const buildSizeUnit = document.querySelector('.build-size-unit');
+        const tailleInput = document.getElementById('taille');
+        const tailleValue = document.getElementById('tailleValue');
 
-        buildSizeInput.addEventListener('input', (e) => {
-            const value = e.target.value;
-            buildSizeUnit.textContent = `x ${value}`;
+        tailleInput.addEventListener('input', function() {
+            tailleValue.textContent = this.value;
         });
 
         // Gestion de l'affichage des détails des organiques
@@ -1296,7 +1338,7 @@
             try {
                 const formData = {
                     pseudo: document.getElementById('pseudo').value,
-                    buildSize: document.getElementById('buildSize').value,
+                    taille: document.getElementById('taille').value,
                     version: document.getElementById('version').value,
                     type: Array.from(document.querySelectorAll('input[name="type"]:checked')).map(cb => cb.value),
                     exclusivite: document.querySelector('input[name="exclusivite"]:checked').value,
@@ -1329,7 +1371,7 @@
                 const templateParams = {
                     to_email: 'luscianabuilds@gmail.com',
                     pseudo: formData.pseudo,
-                    buildSize: formData.buildSize,
+                    taille: formData.taille,
                     version: formData.version,
                     type: formData.type.join(', '),
                     exclusivite: formData.exclusivite,
@@ -1418,16 +1460,14 @@
         const langOptions = document.querySelectorAll('.lang-option');
         let currentLang = localStorage.getItem('language') || 'fr';
 
-        function setLanguage(lang) {
+        function updateLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('language', lang);
             
-            // Mettre à jour les classes actives
             langOptions.forEach(option => {
                 option.classList.toggle('active', option.textContent.toLowerCase() === lang);
             });
 
-            // Traduire tous les éléments avec l'attribut data-translate
             document.querySelectorAll('[data-translate]').forEach(element => {
                 const key = element.getAttribute('data-translate');
                 if (translations[lang] && translations[lang][key]) {
@@ -1436,16 +1476,16 @@
             });
         }
 
-        // Ajouter les événements de clic sur les options de langue
+        // Initialiser la langue
+        updateLanguage(currentLang);
+
+        // Ajouter les écouteurs d'événements pour le changement de langue
         langOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const lang = option.textContent.toLowerCase();
-                setLanguage(lang);
+                updateLanguage(lang);
             });
         });
-
-        // Initialiser la langue au chargement de la page
-        setLanguage(currentLang);
     </script>
 </body>
 </html> 

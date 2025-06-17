@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lusciana - Accueil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Lusciana - Build Team - Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #333;
+            --accent-color: #ffd700;
+            --text-color: #ffffff;
+            --hover-color: #ffed4a;
+            --transition-speed: 0.3s;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -25,6 +34,7 @@
             color: #FFFFFF;
         }
 
+        /* Navbar Styles */
         .navbar {
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
@@ -39,25 +49,6 @@
             z-index: 1000;
             height: 65px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .navbar-brand {
-            font-family: 'Montserrat', sans-serif;
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #225071, #77E0F5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-brand:hover {
-            transform: scale(1.05);
-            filter: brightness(1.2);
         }
 
         .navbar-content {
@@ -102,6 +93,25 @@
             transform: rotate(-45deg) translate(7px, -7px);
         }
 
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #225071, #77E0F5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
         .server-ip {
             font-family: 'Inter', sans-serif;
             color: #FFFFFF;
@@ -114,7 +124,6 @@
             transition: all 0.3s ease;
             cursor: pointer;
             white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .server-ip:hover {
@@ -199,230 +208,92 @@
             transition: all 0.3s ease;
             font-weight: 500;
             font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        .lang-option:hover {
-            opacity: 1;
-            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .lang-option.active {
             background: linear-gradient(45deg, #225071, #77E0F5);
-            opacity: 1;
-        }
-
-        .cards-container {
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            padding: 2rem;
-            max-width: 1400px;
-            width: 100%;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .cards-container.scrolled {
-            opacity: 0;
-            transform: translate(-50%, -100%);
-            pointer-events: none;
-        }
-
-        .card {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            flex: 1;
-            max-width: 320px;
-            min-width: 280px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .card:hover {
-            transform: translateY(-15px) scale(1.05);
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
-        }
-
-        .card h2 {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .portfolio-section {
-            position: relative;
-            min-height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            margin-top: 100vh;
-            overflow: hidden;
-            margin-bottom: 0;
-        }
-
-        .curtain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #225071, #77E0F5);
-            transform-origin: top;
-            transform: scaleY(0);
-            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
-            z-index: 1;
-        }
-
-        .curtain.open {
-            transform: scaleY(1);
-        }
-
-        .portfolio-content {
-            position: relative;
-            z-index: 2;
-            padding: 6rem 40px 4rem;
-            width: 100%;
-            margin: 0;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-            box-sizing: border-box;
-        }
-
-        .portfolio-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .portfolio-title {
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            padding: 0 20px;
-            width: 100%;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 0;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            margin: 0;
-        }
-
-        .gallery-item.featured {
-            grid-column: 1 / -1;
-            aspect-ratio: 21/9;
-        }
-
-        .gallery-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.03);
-        }
-
-        .gallery-item .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem;
-            color: white;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            transform: translateY(0);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .gallery-item:hover .caption {
-            opacity: 1;
-        }
-
-        .gallery-item .caption h3 {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
             color: #FFFFFF;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            padding: 2rem;
-            box-sizing: border-box;
+        .lang-option:hover {
+            color: #77E0F5;
         }
 
-        .modal-content {
-            max-width: 90%;
-            max-height: 90vh;
-            margin: auto;
-            display: block;
-            border-radius: 10px;
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .navbar-content {
+                position: fixed;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            .navbar-content.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .server-ip {
+                margin: 1rem 0;
+            }
+
+            .nav-right {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                height: 50px;
+            }
+
+            .navbar-content {
+                top: 50px;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .server-ip {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.7rem;
+            }
+
+            .nav-right {
+                gap: 1.2rem;
+            }
+
+            .home-icon {
+                font-size: 1.1rem;
+            }
+
+            .lang-selector {
+                gap: 0.2rem;
+                padding: 0.1rem;
+            }
+
+            .lang-option {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.3rem;
+            }
         }
 
-        .close-modal:hover {
-            transform: scale(1.1);
-        }
-
+        /* Footer Styles */
         .footer {
             background: linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.85));
             padding: 3rem 0;
@@ -552,144 +423,285 @@
             margin: 0.5rem 0;
         }
 
-        @media (max-width: 1200px) {
-            .cards-container {
+        @media (max-width: 768px) {
+            .footer-content {
                 gap: 1.5rem;
-                padding: 1.5rem;
             }
 
-            .card {
-                max-width: 280px;
-                min-width: 240px;
-                padding: 2rem;
+            .footer-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: center;
+            }
+
+            .social-links {
+                gap: 2rem;
             }
         }
 
-        @media (max-width: 992px) {
-            .cards-container {
-                flex-wrap: wrap;
-            }
+        .main-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 65px - 300px);
+            padding-top: 26vh;
+            padding-bottom: 5vh;
+        }
 
-            .card {
-                max-width: 260px;
-                min-width: 220px;
-                padding: 1.8rem;
-            }
+        .main-button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(34, 80, 113, 0.9), rgba(119, 224, 245, 0.9));
+            border-radius: 20px;
+            text-decoration: none;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            min-height: 150px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .main-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .main-button:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .main-button i {
+            font-size: 2rem;
+            margin-right: 1rem;
+            transition: transform 0.4s ease;
+        }
+
+        .main-button:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .main-button.recrutement {
+            background: linear-gradient(135deg, #2C3E50, #3498DB);
+        }
+
+        .main-button.devis {
+            background: linear-gradient(135deg, #1A5276, #5DADE2);
+        }
+
+        .main-button.avis {
+            background: linear-gradient(135deg, #2874A6, #85C1E9);
+        }
+
+        .main-button.aide {
+            background: linear-gradient(135deg, #154360, #AED6F1);
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 0.6rem 1.2rem;
-                height: 55px;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .navbar-content {
-                position: fixed;
-                top: 55px;
-                left: 0;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .navbar-content.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .server-ip {
-                width: 100%;
-                text-align: center;
-                margin: 0.5rem 0;
-            }
-
-            .nav-right {
-                width: 100%;
-                justify-content: center;
+            .main-buttons {
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
+                margin: 0 auto;
+                min-height: calc(100vh - 50px - 300px);
+                padding-top: 30vh;
+                padding-bottom: 5vh;
             }
 
-            .card h2 {
-                font-size: 1.6rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 0.5rem 1rem;
-                height: 50px;
+            .main-button {
+                padding: 1.2rem;
+                font-size: 1.3rem;
+                min-height: 120px;
+                max-width: 300px;
             }
 
-            .navbar-content {
-                top: 50px;
-            }
-
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
-
-            .server-ip {
-                font-size: 0.7rem;
-                padding: 0.35rem 0.7rem;
-            }
-
-            .nav-right {
-                gap: 1.2rem;
-            }
-
-            .home-icon {
-                font-size: 1.1rem;
-            }
-
-            .lang-selector {
-                gap: 0.2rem;
-                padding: 0.1rem;
-            }
-
-            .lang-option {
-                font-size: 0.7rem;
-                padding: 0.1rem 0.3rem;
-            }
-
-            .card h2 {
-                font-size: 1.4rem;
+            .main-button i {
+                font-size: 1.8rem;
             }
         }
 
-        @media (max-height: 600px) {
-            .cards-container {
-                top: 60%;
-            }
+        .portfolio-section {
+            padding: 4rem 0.5rem;
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
         }
 
-        @media (max-height: 500px) {
-            .cards-container {
-                top: 70%;
-            }
+        .portfolio-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
-        @media (max-height: 400px) {
-            .cards-container {
-                top: 80%;
+        .portfolio-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #225071, #77E0F5);
+            border-radius: 2px;
+        }
+
+        .main-showcase {
+            padding: 0 10px;
+            max-width: 100%;
+            position: relative;
+        }
+
+        .main-showcase img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .main-showcase::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            right: 10px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            border-radius: 0 0 15px 15px;
+            pointer-events: none;
+        }
+
+        .main-showcase:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 0 0.5rem;
+            max-width: 100%;
+            margin: 1rem auto 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 16/9;
+            min-height: 400px;
+            width: 100%;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item .caption h3 {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.77,0,0.175,1), transform 0.6s cubic-bezier(0.77,0,0.175,1);
+        }
+
+        .gallery-item.visible .caption h3 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 10px;
+            }
+
+            .gallery-item {
+                min-height: 300px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <button class="hamburger" aria-label="Menu">
             <span></span>
@@ -698,7 +710,7 @@
         </button>
         <a href="index.html" class="navbar-brand">Lusciana</a>
         <div class="navbar-content">
-            <div class="server-ip">IP: game1.hebergtonserv.com:25567</div>
+            <div class="server-ip">IP: play.lusciana.fr</div>
             <div class="nav-right">
                 <a href="index.html" class="home-icon" aria-label="Accueil">
                     <svg viewBox="0 0 24 24">
@@ -713,68 +725,50 @@
         </div>
     </nav>
 
-    <div class="cards-container">
-        <a href="recrutement.html" class="card">
-            <h2 data-translate="recrutement">Recrutement</h2>
+    <div class="main-buttons">
+        <a href="recrutement.html" class="main-button recrutement">
+            <i class="fas fa-users"></i>
+            <span data-translate="recrutement">Recrutement</span>
         </a>
-        <a href="devis.html" class="card">
-            <h2 data-translate="devis">Devis</h2>
+        <a href="devis.html" class="main-button devis">
+            <i class="fas fa-file-invoice"></i>
+            <span data-translate="devis">Devis</span>
         </a>
-        <a href="avis.html" class="card">
-            <h2 data-translate="avis">Avis</h2>
+        <a href="avis.html" class="main-button avis">
+            <i class="fas fa-star"></i>
+            <span data-translate="avis">Avis</span>
         </a>
-        <a href="bugs.html" class="card">
-            <h2 data-translate="bugs">Bugs</h2>
+        <a href="aide.html" class="main-button aide">
+            <i class="fas fa-question-circle"></i>
+            <span data-translate="aide">Aide</span>
         </a>
     </div>
 
     <section class="portfolio-section">
-        <div class="curtain"></div>
-        <div class="portfolio-content">
-            <h1 class="portfolio-title" data-translate="notre-vitrine">Notre Vitrine</h1>
-            <div class="gallery">
-                <div class="gallery-item featured">
-                    <img src="img/sombrosiaSaatoriCorqline.png" alt="Sombrosia Saatori Corqline">
-                    <div class="caption">
-                        <h3 data-translate="sombrosia">Sombrosia Saatori Corqline</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="img/cubeLockSaatoriCorqline.png" alt="Cube Lock Saatori Corqline">
-                    <div class="caption">
-                        <h3 data-translate="cube-lock">Cube Lock Saatori Corqline</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="img/Loper9-2.jpg" alt="Loper 9">
-                    <div class="caption">
-                        <h3 data-translate="loper">Loper 9</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="img/scale35SaatoriCorqline.png" alt="Scale 35 Saatori Corqline">
-                    <div class="caption">
-                        <h3 data-translate="scale">Scale 35 Saatori Corqline</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="img/neloriaPastryRomeo.png" alt="Neloria Pastry Romeo">
-                    <div class="caption">
-                        <h3 data-translate="neloria">Neloria Pastry Romeo</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="img/skyislandsSaatori.png" alt="Sky Islands Saatori">
-                    <div class="caption">
-                        <h3 data-translate="sky-islands">Sky Islands Saatori</h3>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="img/greekCorqline.png" alt="Greek Corqline">
-                    <div class="caption">
-                        <h3 data-translate="greek">Greek Corqline</h3>
-                    </div>
-                </div>
+        <h2 class="portfolio-title" data-translate="notre-vitrine">Notre Vitrine</h2>
+        
+        <div class="main-showcase" data-title="Sombrosia">
+            <img src="img/sombrosiaSaatoriCorqline.png" alt="Sombrosia">
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item" data-title="Palais SNK">
+                <img src="img/snkPalaisRender.jpg" alt="Palais SNK">
+            </div>
+            <div class="gallery-item" data-title="Neloria">
+                <img src="img/neloriaPastryRomeo.png" alt="Neloria">
+            </div>
+            <div class="gallery-item" data-title="Scale35">
+                <img src="img/scale35SaatoriCorqline.png" alt="Scale35">
+            </div>
+            <div class="gallery-item" data-title="Greek Themed">
+                <img src="img/greekCorqline.png" alt="Greek Themed">
+            </div>
+            <div class="gallery-item" data-title="Sky Islands">
+                <img src="img/skyislandsSaatori.png" alt="Sky Islands">
+            </div>
+            <div class="gallery-item" data-title="Cube Lock">
+                <img src="img/cubeLockSaatoriCorqline.png" alt="Cube Lock">
             </div>
         </div>
     </section>
@@ -801,17 +795,11 @@
         </div>
     </footer>
 
-    <div class="modal" id="imageModal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
-
     <script src="translations.js"></script>
-    <script src="js/imageProtection.js"></script>
     <script>
         // Script pour la copie de l'IP
         const serverIp = document.querySelector('.server-ip');
-        const ipText = 'game1.hebergtonserv.com:25567';
+        const ipText = 'play.lusciana.fr';
 
         serverIp.addEventListener('click', async () => {
             try {
@@ -824,100 +812,6 @@
                 console.error('Erreur lors de la copie:', err);
             }
         });
-
-        // Script pour la galerie modale
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        const closeBtn = document.querySelector('.close-modal');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const img = item.querySelector('img');
-                modal.style.display = 'flex';
-                modalImg.src = img.src;
-            });
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // Script pour l'animation du rideau et du portfolio
-        const portfolioSection = document.querySelector('.portfolio-section');
-        const curtain = document.querySelector('.curtain');
-        const portfolioContent = document.querySelector('.portfolio-content');
-        const galleryItemsArray = Array.from(document.querySelectorAll('.gallery-item'));
-        const cardsContainer = document.querySelector('.cards-container');
-
-        let curtainOpened = false;
-
-        window.addEventListener('scroll', () => {
-            const rect = portfolioSection.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const scrollPosition = window.scrollY;
-
-            // Gestion de la disparition des cartes
-            if (scrollPosition > 100) {
-                cardsContainer.classList.add('scrolled');
-            } else {
-                cardsContainer.classList.remove('scrolled');
-            }
-
-            if (rect.top < windowHeight * 0.8 && !curtainOpened) {
-                curtain.classList.add('open');
-                curtainOpened = true;
-
-                setTimeout(() => {
-                    portfolioContent.classList.add('visible');
-                    
-                    galleryItemsArray.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.classList.add('visible');
-                        }, index * 200);
-                    });
-                }, 1000);
-            }
-        });
-
-        // Script pour le changement de langue
-        const langOptions = document.querySelectorAll('.lang-option');
-        let currentLang = localStorage.getItem('language') || 'fr';
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('language', lang);
-            
-            // Mettre à jour les classes actives
-            langOptions.forEach(option => {
-                option.classList.toggle('active', option.textContent.toLowerCase() === lang);
-            });
-
-            // Traduire tous les éléments avec l'attribut data-translate
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-        }
-
-        // Ajouter les événements de clic sur les options de langue
-        langOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const lang = option.textContent.toLowerCase();
-                setLanguage(lang);
-            });
-        });
-
-        // Initialiser la langue au chargement de la page
-        setLanguage(currentLang);
 
         // Script pour le menu hamburger
         const hamburger = document.querySelector('.hamburger');
@@ -940,19 +834,52 @@
 
         // Fermer le menu quand on clique en dehors
         document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navbarContent.contains(e.target)) {
+            if (!e.target.closest('.navbar')) {
                 hamburger.classList.remove('active');
                 navbarContent.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
 
-        // Fermer le menu lors du redimensionnement de la fenêtre
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                hamburger.classList.remove('active');
-                navbarContent.classList.remove('active');
-                document.body.style.overflow = '';
+        // Gestion du changement de langue
+        const langOptions = document.querySelectorAll('.lang-option');
+        let currentLang = localStorage.getItem('language') || 'fr';
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            
+            // Mettre à jour les classes actives
+            langOptions.forEach(option => {
+                option.classList.toggle('active', option.textContent.toLowerCase() === lang);
+            });
+
+            // Mettre à jour les textes
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Initialiser la langue
+        updateLanguage(currentLang);
+
+        // Ajouter les écouteurs d'événements pour le changement de langue
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.textContent.toLowerCase();
+                updateLanguage(lang);
+            });
+        });
+
+        // Ajouter la gestion de la transition des titres
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach((item, index) => {
+            const caption = item.querySelector('.caption h3');
+            if (caption) {
+                caption.style.transitionDelay = (index * 0.15 + 0.5) + 's';
             }
         });
     </script>
